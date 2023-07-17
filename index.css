@@ -1,0 +1,43 @@
+body {
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  background: rgb(219, 210, 210);
+}
+
+.container {
+  margin: auto;
+  padding: 102px;
+  width: 1150px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  color: #000;
+}
+
+.title__input {
+  display: block;
+  margin-bottom: 30px;
+  width: 500px;
+  height: 60px;
+}
+
+.post__btn {
+  margin-bottom: 30px;
+  width: 500px;
+  height: 60px;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  background-color: #0094ff;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
