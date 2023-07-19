@@ -11,15 +11,24 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="/" />
+    <link rel="icon" href="blog-icon.jpg" />
     <title>Мой личный блог</title>
   </head>
   <body>
     <div class="container">
-      <h1>Новый пост</h1>
-      <input id="titleInput" class="title__input" type="text" />
-      <button id="postBtn" class="post__btn">Опубликовать</button>
-      <p id="postedTitle" class="posted__title">Тут пока пусто</p>
+      <div class="input-section">
+        <h1>Новый пост</h1>
+        <input
+          id="titleInput"
+          class="title__input"
+          type="text"
+          placeholder="Введите название заголовка"
+        />
+        <button id="postBtn" class="post__btn">Опубликовать</button>
+      </div>
+      <div class="output-section">
+        <p id="postedTitle" class="posted__title">Тут пока пусто</p>
+      </div>
     </div>
 
     <script src="index.js"></script>

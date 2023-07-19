@@ -9,7 +9,7 @@ body {
   padding: 102px;
   width: 1150px;
   display: flex;
-  flex-direction: column;
+  gap: 30px;
 }
 
 h1 {
@@ -26,6 +26,10 @@ h1 {
   margin-bottom: 30px;
   width: 500px;
   height: 60px;
+  font-size: 32px;
+  line-height: 38px;
+  letter-spacing: -0.03em;
+  border-radius: 10px;
 }
 
 .post__btn {
@@ -40,4 +44,5 @@ h1 {
   color: #fff;
   text-align: center;
   cursor: pointer;
+  border-radius: 20px;
 }
