@@ -1,8 +1,13 @@
-let post = null;
+let post = {
+  //cоздаем объект внутри переменной post c помощью {title:'',text:'',}
+  title: "",
+  text: "",
+};
 
 const titleInputNode = document.getElementById("titleInput");
+const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
-const postedTitleNode = document.getElementById("postedTitle");
+const postsNode = document.getElementById("posts");
 
 postBtnNode.addEventListener("click", function () {
   // 1 вариант кода
@@ -24,14 +29,33 @@ postBtnNode.addEventListener("click", function () {
 });
 
 function getPostFromUser() {
-  const post = titleInputNode.value;
-  return post;
+  const title = titleInputNode.value; // меняем post -> title
+  const text = textInputNode.value; // и добавляем эту строку
+  return {
+    // меняем post -> объект
+    title: title,
+    text: text,
+  };
 }
 
 function savePost(newPost) {
   post = newPost;
 }
 
+function getPost() {
+  return post;
+}
+
 function renderPost() {
-  postedTitleNode.innerText = post;
+  const postHTML = `
+  <div class="post">
+  <p class="post__title">${post.title}</p>
+  <p class="post__text">${post.text}</p>
+  </div>
+  `;
+
+  postsNode.innerHTML = postHTML;
+
+  //console.log(getPost());
+  //postedTitleNode.innerText = post;
 }
