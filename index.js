@@ -1,8 +1,11 @@
-let post = {
-  //cоздаем объект внутри переменной post c помощью {title:'',text:'',}
-  title: "",
-  text: "",
-};
+//cоздаем объект внутри переменной post c помощью {title:'',text:'',}
+//let post = {
+//  title: "",
+//  text: "",};
+// при такой записи каждый новый пост перезапиывает старый
+
+//создаем массив posts
+const posts = [];
 
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
@@ -21,11 +24,12 @@ postBtnNode.addEventListener("click", function () {
   // сначала получаем данные из поля вводда
   const postFromUser = getPostFromUser();
 
-  // затем сохраняем пост функцией setPost
-  savePost(postFromUser);
+  // затем сохраняем пост функцией setPost - меняем на addPost
+  //savePost(postFromUser);
+  addPost(postFromUser);
 
-  // и отображаем текст в postedTitle
-  renderPost();
+  // и отображаем текст в posts
+  renderPosts();
 });
 
 function getPostFromUser() {
@@ -38,23 +42,37 @@ function getPostFromUser() {
   };
 }
 
-function savePost(newPost) {
-  post = newPost;
+//function savePost(newPost) { -  эта функция была нужна, чтобы сохранять новый пост - меняем её на addpost
+//  post = newPost;}
+
+function addPost({ title, text }) {
+  // === addPost(post)
+  posts.push({
+    // === posts.push(post)
+    title, // === title: title,
+    text, // === text: title,
+  });
 }
 
-function getPost() {
-  return post;
+function getPosts() {
+  return posts;
 }
 
-function renderPost() {
-  const postHTML = `
-  <div class="post">
-  <p class="post__title">${post.title}</p>
-  <p class="post__text">${post.text}</p>
-  </div>
-  `;
+function renderPosts() {
+  const posts = getPosts();
 
-  postsNode.innerHTML = postHTML;
+  let postsHTML = "";
+
+  posts.forEach((post) => {
+    postsHTML += `
+      <div class="post">
+        <p class="post__title">${post.title}</p>
+        <p class="post__text">${post.text}</p>
+      </div>
+     `;
+  });
+
+  postsNode.innerHTML = postsHTML;
 
   //console.log(getPost());
   //postedTitleNode.innerText = post;
