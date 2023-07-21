@@ -23,19 +23,28 @@ h1 {
 
 .title__input,
 .text__input {
-  display: block;
   margin-bottom: 30px;
+  padding: 11px 0 10px 20px;
   width: 500px;
   height: 60px;
   font-size: 32px;
   line-height: 38px;
   letter-spacing: -0.03em;
-  border-radius: 10px;
+  color: #979797;
+  border: 1px solid #000;
 }
 
 .text__input {
-  height: 200px;
+  height: 250px;
+  text-align: left;
+  vertical-align: top;
 }
+
+.text__input::placeholder {
+  text-align: left;
+  vertical-align: top;
+}
+
 .post__btn {
   margin-bottom: 30px;
   width: 500px;
