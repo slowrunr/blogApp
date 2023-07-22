@@ -6,11 +6,13 @@
 
 //создаем массив posts
 const posts = [];
-
+const TITLE_LENGTH_LIMIT = 10;
+const TEXT_LENGTH_LIMIT = 20;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
 const postsNode = document.getElementById("posts");
+const warningMessage = document.getElementById("warningMessage");
 
 postBtnNode.addEventListener("click", function () {
   // 1 вариант кода
@@ -31,6 +33,27 @@ postBtnNode.addEventListener("click", function () {
   // и отображаем текст в posts
   renderPosts();
 });
+
+titleInputNode.addEventListener("input", validation);
+textInputNode.addEventListener("input", validation);
+
+function validation(event) {
+  const titleLength = titleInputNode.value.length;
+  const textLength = textInputNode.value.length;
+
+  if (titleLength > TITLE_LENGTH_LIMIT) {
+    warningMessage.innerText = `Заголовок больше ${TITLE_LENGTH_LIMIT} символов`;
+    warningMessage.classList.remove("warning__message-hidden");
+    return;
+  }
+
+  if (textLength > TEXT_LENGTH_LIMIT) {
+    warningMessage.innerText = `Пост больше ${TEXT_LENGTH_LIMIT} символов`;
+    warningMessage.classList.remove("warning__message-hidden");
+    return;
+  }
+  warningMessage.classList.add("warning__message-hidden");
+}
 
 function getPostFromUser() {
   const title = titleInputNode.value; // меняем post -> title
