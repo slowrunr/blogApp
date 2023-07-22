@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="input-data">
+      <form class="input-data">
         <h1>Новый пост</h1>
         <input
           id="titleInput"
@@ -24,21 +24,35 @@
           type="text"
           placeholder="Заголовок"
         />
+        <label
+          id="title__length-counter"
+          class="symbols__counter"
+          for="title__input"
+          >0/100</label
+        >
         <textarea
           id="textInput"
           class="text__input"
           type="text"
           placeholder="Напиши пост"
         ></textarea>
+        <label
+          id="text__length-counter"
+          class="symbols__counter"
+          for="text__input"
+          >0/500</label
+        >
         <button id="postBtn" class="post__btn">Опубликовать</button>
         <p
           id="warningMessage"
           class="warning__message warning__message-hidden"
         ></p>
-      </div>
+      </form>
       <div class="output-data">
         <h2 class="output__title">Лента</h2>
-        <p id="posts" class="posts">Тут пока пусто...</p>
+        <ul id="posts" class="posts">
+          Тут пока пусто...
+        </ul>
       </div>
     </div>
 
