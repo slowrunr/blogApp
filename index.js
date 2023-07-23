@@ -88,11 +88,10 @@ function renderPosts() {
 
   posts.forEach((post) => {
     postsHTML += `
-      <div class="post">
-        
+      <li class="post">
         <p class="post__title">${post.title}</p>
         <p class="post__text">${post.text}</p>
-      </div>
+      </li>
      `;
   });
 
