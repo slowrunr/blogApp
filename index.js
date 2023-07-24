@@ -11,8 +11,11 @@ const TEXT_LENGTH_LIMIT = 20;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
+const disableBtnNode = document.getElementById("postBtn");
+const titleLengthCounterNode = document.getElementById("titleLengthCounter");
+const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
-const warningMessage = document.getElementById("warningMessage");
+const warningMessageNode = document.getElementById("warningMessage");
 
 postBtnNode.addEventListener("click", function () {
   // 1 вариант кода
@@ -20,7 +23,6 @@ postBtnNode.addEventListener("click", function () {
   //postTitle = titleInputNode.value;
   //  console.log(postTitle);
   //postedTitleNode.innerText = postTitle;
-
   // 2-й вариант кода с разбивкой по задачам (рефкторинг)
 
   // сначала получаем данные из поля вводда
@@ -36,6 +38,13 @@ postBtnNode.addEventListener("click", function () {
 
 titleInputNode.addEventListener("input", validation);
 textInputNode.addEventListener("input", validation);
+
+function showTitleLengthCounter() {
+  const symbolsLeft = TITLE_LENGTH_LIMIT - titleInputNode.value.length;
+  titleLengthCounterNode.textContent = `${symbolsLeft} /120 `;
+}
+
+titleInputNode.addEventListener("input", showTitleLengthCounter);
 
 function validation(event) {
   const titleLength = titleInputNode.value.length;
@@ -56,6 +65,10 @@ function validation(event) {
 }
 
 function getPostFromUser() {
+  const currentDate = new Date();
+  const dt = `${currentDate.getHours()} : ${currentDate.getMinutes()}`;
+
+  return post;
   const title = titleInputNode.value; // меняем post -> title
   const text = textInputNode.value; // и добавляем эту строку
   return {
@@ -72,6 +85,7 @@ function addPost({ title, text }) {
   // === addPost(post)
   posts.push({
     // === posts.push(post)
+    dt,
     title, // === title: title,
     text, // === text: title,
   });
@@ -89,6 +103,7 @@ function renderPosts() {
   posts.forEach((post) => {
     postsHTML += `
       <li class="post">
+        <p class="current__date">${post.date}</p>
         <p class="post__title">${post.title}</p>
         <p class="post__text">${post.text}</p>
       </li>
