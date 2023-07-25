@@ -11,9 +11,9 @@ const TEXT_LENGTH_LIMIT = 20;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
-const disableBtnNode = document.getElementById("postBtn");
-const titleLengthCounterNode = document.getElementById("titleLengthCounter");
-const textLengthCounterNode = document.getElementById("textLengthCounter");
+//const disableBtnNode = document.getElementById("postBtn");
+//const titleLengthCounterNode = document.getElementById("titleLengthCounter");
+//const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
 const warningMessageNode = document.getElementById("warningMessage");
 
@@ -24,14 +24,11 @@ postBtnNode.addEventListener("click", function () {
   //  console.log(postTitle);
   //postedTitleNode.innerText = postTitle;
   // 2-й вариант кода с разбивкой по задачам (рефкторинг)
-
   // сначала получаем данные из поля вводда
   const postFromUser = getPostFromUser();
-
   // затем сохраняем пост функцией setPost - меняем на addPost
   //savePost(postFromUser);
   addPost(postFromUser);
-
   // и отображаем текст в posts
   renderPosts();
 });
@@ -39,12 +36,12 @@ postBtnNode.addEventListener("click", function () {
 titleInputNode.addEventListener("input", validation);
 textInputNode.addEventListener("input", validation);
 
-function showTitleLengthCounter() {
-  const symbolsLeft = TITLE_LENGTH_LIMIT - titleInputNode.value.length;
-  titleLengthCounterNode.textContent = `${symbolsLeft} /120 `;
-}
-
-titleInputNode.addEventListener("input", showTitleLengthCounter);
+//function showTitleLengthCounter() {
+//const symbolsLeft = TITLE_LENGTH_LIMIT - titleInputNode.value.length;
+//titleLengthCounterNode.textContent = `${symbolsLeft} /120 `;
+//return;
+//}
+//titleInputNode.addEventListener("input", showTitleLengthCounter);
 
 function validation(event) {
   const titleLength = titleInputNode.value.length;
@@ -60,15 +57,14 @@ function validation(event) {
     warningMessage.innerText = `Пост больше ${TEXT_LENGTH_LIMIT} символов`;
     warningMessage.classList.remove("warning__message-hidden");
     return;
+  } else {
+    warningMessage.classList.add("warning__message-hidden");
   }
-  warningMessage.classList.add("warning__message-hidden");
 }
 
 function getPostFromUser() {
-  const currentDate = new Date();
-  const dt = `${currentDate.getHours()} : ${currentDate.getMinutes()}`;
-
-  return post;
+  //const currentDate = new Date();
+  //const dt = `${currentDate.getHours()} : ${currentDate.getMinutes()}`;
   const title = titleInputNode.value; // меняем post -> title
   const text = textInputNode.value; // и добавляем эту строку
   return {
@@ -85,7 +81,6 @@ function addPost({ title, text }) {
   // === addPost(post)
   posts.push({
     // === posts.push(post)
-    dt,
     title, // === title: title,
     text, // === text: title,
   });
@@ -97,16 +92,14 @@ function getPosts() {
 
 function renderPosts() {
   const posts = getPosts();
-
   let postsHTML = "";
 
   posts.forEach((post) => {
     postsHTML += `
-      <li class="post">
-        <p class="current__date">${post.date}</p>
+      <div class="post">
         <p class="post__title">${post.title}</p>
         <p class="post__text">${post.text}</p>
-      </li>
+      </div>
      `;
   });
 
