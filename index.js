@@ -79,14 +79,10 @@ function addPost({ title, text }) {
   // === addPost(post)
   const currentDate = new Date();
   // читается как "присвоить экземпляр объекта Date"
-  const dt = `${currentDate.getDay}.
-  ${currentDate.getMonth}.
-  ${currentDate.getFullYear}
-    ${currentDate.getHour}:${currentDate.getMinutes}`;
 
   posts.push({
     // === posts.push(post)
-    dt,
+    currentDate,
     title, // === title: title,
     text, // === text: title,
   });
@@ -103,7 +99,10 @@ function renderPosts() {
   posts.forEach((post) => {
     postsHTML += `
       <div class="post">
-        <p class="post__date">${post.dt}</p>
+        <p class="post__date">${post.currentDate.toLocaleDateString()} ${post.currentDate.toLocaleTimeString(
+      [],
+      { hour: "2-digit", minute: "2-digit" }
+    )}</p>
         <p class="post__title">${post.title}</p>
         <p class="post__text">${post.text}</p>
       </div>
