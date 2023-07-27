@@ -14,7 +14,7 @@ const postBtnNode = document.getElementById("postBtn");
 //const titleLengthCounterNode = document.getElementById("titleLengthCounter");
 //const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
-const warningMessageNode = document.getElementById("warningMessage");
+const warningsNode = document.getElementById("warnings");
 
 postBtnNode.addEventListener("click", function () {
   // 1 вариант кода
@@ -25,6 +25,14 @@ postBtnNode.addEventListener("click", function () {
   // 2-й вариант кода с разбивкой по задачам (рефкторинг)
   // сначала получаем данные из поля вводда
   const postFromUser = getPostFromUser();
+
+  if (!postFromUser.title || !postFromUser.text) {
+    warningMessage.innerText = `Пожалуйста, заполните все поля`;
+    warningMessage.classList.remove("warning__message-hidden");
+    disableBtn();
+    return;
+  }
+
   // затем сохраняем пост функцией setPost - меняем на addPost
   //savePost(postFromUser);
   addPost(postFromUser);
@@ -67,6 +75,7 @@ function validation(event) {
   } else {
     warningMessage.classList.add("warning__message-hidden");
     activeBtn();
+    return;
   }
 }
 
