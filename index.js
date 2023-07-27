@@ -11,7 +11,6 @@ const TEXT_LENGTH_LIMIT = 20;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
-//const disableBtnNode = document.getElementById("postBtn");
 //const titleLengthCounterNode = document.getElementById("titleLengthCounter");
 //const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
@@ -46,19 +45,28 @@ textInputNode.addEventListener("input", validation);
 function validation(event) {
   const titleLength = titleInputNode.value.length;
   const textLength = textInputNode.value.length;
+  const disableBtn = () => {
+    postBtnNode.disabled = true;
+  };
+  const activeBtn = () => {
+    postBtnNode.disabled = false;
+  };
 
   if (titleLength > TITLE_LENGTH_LIMIT) {
     warningMessage.innerText = `Заголовок больше ${TITLE_LENGTH_LIMIT} символов`;
     warningMessage.classList.remove("warning__message-hidden");
+    disableBtn();
     return;
   }
 
   if (textLength > TEXT_LENGTH_LIMIT) {
     warningMessage.innerText = `Пост больше ${TEXT_LENGTH_LIMIT} символов`;
     warningMessage.classList.remove("warning__message-hidden");
+    disableBtn();
     return;
   } else {
     warningMessage.classList.add("warning__message-hidden");
+    activeBtn();
   }
 }
 
@@ -72,42 +80,11 @@ function getPostFromUser() {
   };
 }
 
-// пробуем добавить функционал с записью "кол-во минут назад". Взято из https://stackoverflow.com/questions/3177836/how-to-format-time-since-xxx-e-g-4-minutes-ago-similar-to-stack-exchange-site
-function formatedDate(date) {
-  const dt = new Date();
-  let dayOfMonth = dt.getDate();
-  let month = dt.getMonth() + 1;
-  let year = dt.getFullYear();
-  let hour = dt.getHours();
-  let minutes = dt.getMinutes();
-  let diffMs = new Date() - dt;
-  let diffSec = Math.round(diffMs / 1000);
-  let diffMin = diffSec / 60;
-  let diffHour = diffMin / 60;
-
-  // форматирование
-  year = year.toString().slice(-2);
-  month = month < 10 ? "0" + month : month;
-  dayOfMonth = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
-  hour = hour < 10 ? "0" + hour : hour;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-
-  if (diffSec < 1) {
-    return "только что";
-  } else if (diffMin < 1) {
-    return `${diffSec} секунд назад`;
-  } else if (diffHour < 1) {
-    return `${diffMin} минут назад`;
-  } else {
-    return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`;
-  }
-}
-
 //function savePost(newPost) { -  эта функция была нужна, чтобы сохранять новый пост - меняем её на addpost
 //  post = newPost;}
 
 function addPost({ title, text }) {
-  const currentDate = formatedDate();
+  const currentDate = new Date();
   // === addPost(post)
   //const currentDate = new Date();
   // читается как "присвоить экземпляр объекта Date"
@@ -130,11 +107,14 @@ function renderPosts() {
 
   posts.forEach((post) => {
     postsHTML += `
-      <div class="post">
-        <p class="post__date">${post.currentDate}</p>
+      <li class="post">
+        <p class="post__date">${post.currentDate.toLocaleDateString()} ${post.currentDate.toLocaleTimeString(
+      [],
+      { hour: "2-digit", minute: "2-digit" }
+    )}</p>
         <p class="post__title">${post.title}</p>
         <p class="post__text">${post.text}</p>
-      </div>
+      </li>
      `;
   });
 
