@@ -1,10 +1,3 @@
-//cоздаем объект внутри переменной post c помощью {title:'',text:'',}
-//let post = {
-//  title: "",
-//  text: "",};
-// при такой записи каждый новый пост перезапиывает старый
-
-//создаем массив posts
 const posts = [];
 const TITLE_LENGTH_LIMIT = 100;
 const TEXT_LENGTH_LIMIT = 200;
@@ -17,13 +10,6 @@ const postsNode = document.getElementById("posts");
 const warningsNode = document.getElementById("warnings");
 
 postBtnNode.addEventListener("click", function () {
-  // 1 вариант кода
-  //console.log("looks good");
-  //postTitle = titleInputNode.value;
-  //  console.log(postTitle);
-  //postedTitleNode.innerText = postTitle;
-  // 2-й вариант кода с разбивкой по задачам (рефкторинг)
-  // сначала получаем данные из поля вводда
   const postFromUser = getPostFromUser();
 
   if (!postFromUser.title || !postFromUser.text) {
@@ -33,10 +19,7 @@ postBtnNode.addEventListener("click", function () {
     return;
   }
 
-  // затем сохраняем пост функцией setPost - меняем на addPost
-  //savePost(postFromUser);
   addPost(postFromUser);
-  // и отображаем текст в posts
   renderPosts();
 });
 
@@ -79,39 +62,30 @@ function validation(event) {
     warningMessage.classList.remove("warning__message-hidden");
     disableBtn();
     return;
-  } else {
-    titleLengthCounterNode.classList.remove("overprinted");
-    textLengthCounterNode.classList.remove("overprinted");
-    warningMessage.classList.add("warning__message-hidden");
-    activeBtn();
-    return;
   }
+
+  titleLengthCounterNode.classList.remove("overprinted");
+  textLengthCounterNode.classList.remove("overprinted");
+  warningMessage.classList.add("warning__message-hidden");
+  activeBtn();
+  return;
 }
 
 function getPostFromUser() {
-  const title = titleInputNode.value; // меняем post -> title
-  const text = textInputNode.value; // и добавляем эту строку
+  const title = titleInputNode.value;
+  const text = textInputNode.value;
   return {
-    // меняем post -> объект
     title: title,
     text: text,
   };
 }
 
-//function savePost(newPost) { -  эта функция была нужна, чтобы сохранять новый пост - меняем её на addpost
-//  post = newPost;}
-
 function addPost({ title, text }) {
   const currentDate = new Date();
-  // === addPost(post)
-  //const currentDate = new Date();
-  // читается как "присвоить экземпляр объекта Date"
-
   posts.push({
-    // === posts.push(post)
     currentDate,
-    title, // === title: title,
-    text, // === text: title,
+    title,
+    text,
   });
 }
 
@@ -137,7 +111,4 @@ function renderPosts() {
   });
 
   postsNode.innerHTML = postsHTML;
-
-  //console.log(getPost());
-  //postedTitleNode.innerText = post;
-} //${post.currentDate.toLocaleDateString()} ${post.currentDate.toLocaleTimeString(  [],  { hour: "2-digit", minute: "2-digit" })}
+}
