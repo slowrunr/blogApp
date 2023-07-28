@@ -36,19 +36,18 @@ h2 {
   margin-bottom: 5px;
   padding: 11px 0 10px 20px;
   width: 500px;
-  height: 60px;
+  height: 39px;
   font-size: 32px;
   line-height: 39px;
   letter-spacing: -0em;
   color: #000;
   border: 1px solid #000;
+  resize: none;
+  text-align: left;
 }
 
 .text__input {
   height: 250px;
-  resize: none;
-  text-align: left;
-  vertical-align: top;
 }
 
 .posts,
@@ -92,8 +91,7 @@ h2 {
 }
 
 p,
-.post__text,
-.symbols__counter {
+.post__text {
   margin-bottom: 50px;
   font-size: 25px;
   font-weight: 400;

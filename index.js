@@ -6,13 +6,13 @@
 
 //создаем массив posts
 const posts = [];
-const TITLE_LENGTH_LIMIT = 10;
-const TEXT_LENGTH_LIMIT = 20;
+const TITLE_LENGTH_LIMIT = 100;
+const TEXT_LENGTH_LIMIT = 500;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
-//const titleLengthCounterNode = document.getElementById("titleLengthCounter");
-//const textLengthCounterNode = document.getElementById("textLengthCounter");
+const titleLengthCounterNode = document.getElementById("titleLengthCounter");
+const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
 const warningsNode = document.getElementById("warnings");
 
@@ -41,14 +41,19 @@ postBtnNode.addEventListener("click", function () {
 });
 
 titleInputNode.addEventListener("input", validation);
+titleInputNode.addEventListener("input", showTitleLength);
 textInputNode.addEventListener("input", validation);
+textInputNode.addEventListener("input", showTextLength);
 
-//function showTitleLengthCounter() {
-//const symbolsLeft = TITLE_LENGTH_LIMIT - titleInputNode.value.length;
-//titleLengthCounterNode.textContent = `${symbolsLeft} /120 `;
-//return;
-//}
-//titleInputNode.addEventListener("input", showTitleLengthCounter);
+function showTitleLength() {
+  titleLengthCounterNode.textContent = `${titleInputNode.value.length}/100`;
+  return;
+}
+
+function showTextLength() {
+  textLengthCounterNode.textContent = `${textInputNode.value.length}/500`;
+  return;
+}
 
 function validation(event) {
   const titleLength = titleInputNode.value.length;
