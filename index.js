@@ -6,13 +6,13 @@
 
 //создаем массив posts
 const posts = [];
-const TITLE_LENGTH_LIMIT = 10;
-const TEXT_LENGTH_LIMIT = 20;
+const TITLE_LENGTH_LIMIT = 100;
+const TEXT_LENGTH_LIMIT = 200;
 const titleInputNode = document.getElementById("titleInput");
 const textInputNode = document.getElementById("textInput"); //добавляем эту строку для поля ввода текста
 const postBtnNode = document.getElementById("postBtn");
-//const titleLengthCounterNode = document.getElementById("titleLengthCounter");
-//const textLengthCounterNode = document.getElementById("textLengthCounter");
+const titleLengthCounterNode = document.getElementById("titleLengthCounter");
+const textLengthCounterNode = document.getElementById("textLengthCounter");
 const postsNode = document.getElementById("posts");
 const warningsNode = document.getElementById("warnings");
 
@@ -41,14 +41,19 @@ postBtnNode.addEventListener("click", function () {
 });
 
 titleInputNode.addEventListener("input", validation);
+titleInputNode.addEventListener("input", showTitleLength);
 textInputNode.addEventListener("input", validation);
+textInputNode.addEventListener("input", showTextLength);
 
-//function showTitleLengthCounter() {
-//const symbolsLeft = TITLE_LENGTH_LIMIT - titleInputNode.value.length;
-//titleLengthCounterNode.textContent = `${symbolsLeft} /120 `;
-//return;
-//}
-//titleInputNode.addEventListener("input", showTitleLengthCounter);
+function showTitleLength() {
+  titleLengthCounterNode.textContent = `${titleInputNode.value.length}/100`;
+  return;
+}
+
+function showTextLength() {
+  textLengthCounterNode.textContent = `${textInputNode.value.length}/200`;
+  return;
+}
 
 function validation(event) {
   const titleLength = titleInputNode.value.length;
@@ -61,6 +66,7 @@ function validation(event) {
   };
 
   if (titleLength > TITLE_LENGTH_LIMIT) {
+    titleLengthCounterNode.classList.add("overprinted");
     warningMessage.innerText = `Заголовок больше ${TITLE_LENGTH_LIMIT} символов`;
     warningMessage.classList.remove("warning__message-hidden");
     disableBtn();
@@ -68,11 +74,14 @@ function validation(event) {
   }
 
   if (textLength > TEXT_LENGTH_LIMIT) {
+    textLengthCounterNode.classList.add("overprinted");
     warningMessage.innerText = `Пост больше ${TEXT_LENGTH_LIMIT} символов`;
     warningMessage.classList.remove("warning__message-hidden");
     disableBtn();
     return;
   } else {
+    titleLengthCounterNode.classList.remove("overprinted");
+    textLengthCounterNode.classList.remove("overprinted");
     warningMessage.classList.add("warning__message-hidden");
     activeBtn();
     return;

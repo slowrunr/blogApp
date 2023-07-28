@@ -42,13 +42,12 @@ h2 {
   letter-spacing: -0em;
   color: #000;
   border: 1px solid #000;
+  resize: none;
+  text-align: left;
 }
 
 .text__input {
   height: 250px;
-  resize: none;
-  text-align: left;
-  vertical-align: top;
 }
 
 .posts,
@@ -69,6 +68,7 @@ h2 {
   color: #fff;
   text-align: center;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .post__btn:hover {
@@ -92,8 +92,7 @@ h2 {
 }
 
 p,
-.post__text,
-.symbols__counter {
+.post__text {
   margin-bottom: 50px;
   font-size: 25px;
   font-weight: 400;
@@ -108,7 +107,8 @@ p,
   color: #0094ff;
 }
 
-.warning__message {
+.warning__message,
+.overprinted {
   color: #f00;
   text-align: center;
 }
