@@ -23,7 +23,8 @@ h2 {
 }
 
 .input-data,
-.output-data {
+.output-data,
+.post {
   width: 500px;
 }
 
@@ -100,6 +101,7 @@ p,
   color: #000;
   letter-spacing: 0em;
   text-align: left;
+  word-wrap: break-word;
 }
 
 .post__date {
